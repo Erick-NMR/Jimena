@@ -86,60 +86,63 @@ body {
 </div>
 
 <script>
-const btn = document.getElementById("btn");
-const flowersContainer = document.getElementById("flowers");
-const final = document.getElementById("final");
+document.addEventListener("DOMContentLoaded", () => {
 
-btn.addEventListener("click", () => {
-  btn.style.display = "none";
+  const btn = document.getElementById("btn");
+  const flowersContainer = document.getElementById("flowers");
+  const final = document.getElementById("final");
 
-  explodeFlowers();
+  btn.addEventListener("click", () => {
+    btn.style.display = "none";
 
-  setTimeout(() => {
-    fadeOutFlowers();
-  }, 3000);
-
-  setTimeout(() => {
-    showFinal();
-  }, 4500);
-});
-
-function explodeFlowers() {
-  for (let i = 0; i < 120; i++) {
-    const flower = document.createElement("div");
-    flower.classList.add("flower");
-
-    // Aleatorio entre girasol y margarita
-    flower.innerHTML = Math.random() > 0.5 ? "🌻" : "🌼";
-
-    flower.style.left = "50%";
-    flower.style.top = "50%";
-
-    flowersContainer.appendChild(flower);
-
-    const angle = Math.random() * 2 * Math.PI;
-    const distance = Math.random() * 600 + 200;
-
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
+    explodeFlowers();
 
     setTimeout(() => {
-      flower.style.transform = translate(${x}px, ${y}px);
-    }, 10);
-  }
-}
+      fadeOutFlowers();
+    }, 3000);
 
-function fadeOutFlowers() {
-  const all = document.querySelectorAll(".flower");
-  all.forEach(f => {
-    f.style.opacity = "0";
+    setTimeout(() => {
+      showFinal();
+    }, 4500);
   });
-}
 
-function showFinal() {
-  flowersContainer.innerHTML = "";
-  final.style.opacity = "1";
-}
+  function explodeFlowers() {
+    for (let i = 0; i < 120; i++) {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+
+      flower.innerHTML = Math.random() > 0.5 ? "🌻" : "🌼";
+
+      flower.style.left = "50%";
+      flower.style.top = "50%";
+
+      flowersContainer.appendChild(flower);
+
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = Math.random() * 600 + 200;
+
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+
+      setTimeout(() => {
+        flower.style.transform = `translate(${x}px, ${y}px)`;
+      }, 10);
+    }
+  }
+
+  function fadeOutFlowers() {
+    const all = document.querySelectorAll(".flower");
+    all.forEach(f => {
+      f.style.opacity = "0";
+    });
+  }
+
+  function showFinal() {
+    flowersContainer.innerHTML = "";
+    final.style.opacity = "1";
+  }
+
+});
 </script>
 
 </body>
